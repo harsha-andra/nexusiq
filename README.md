@@ -1,6 +1,6 @@
 # 🧠 NexusIQ — Universal AI Analytics Platform
 
-**Production-grade end-to-end AI/ML platform** that unifies data pipelines, ML models, GenAI, and observability into one deployable stack — built with the same architecture used at Netflix, JPMorgan, and Datadog.
+**Production-grade end-to-end AI/ML platform** that unifies data pipelines, ML models, GenAI, and observability into one deployable stack built with the same architecture used at Netflix, JPMorgan, and Datadog.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue) ![PySpark](https://img.shields.io/badge/PySpark-3.5-orange) ![Hadoop](https://img.shields.io/badge/Hadoop-3.3-yellow) ![Kafka](https://img.shields.io/badge/Apache%20Kafka-3.6-black) ![Docker](https://img.shields.io/badge/Docker-24-2496ED) ![Kubernetes](https://img.shields.io/badge/Kubernetes-1.29-326CE5) ![AWS](https://img.shields.io/badge/AWS-EMR%20%7C%20SageMaker-FF9900) ![Terraform](https://img.shields.io/badge/Terraform-1.7-7B42BC) ![LangChain](https://img.shields.io/badge/LangChain-0.2-1C3C3C) ![HuggingFace](https://img.shields.io/badge/🤗-HuggingFace-yellow) ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -16,7 +16,7 @@ The frontend is **deployed live to the public** at [nexusiq-nine.vercel.app](htt
 
 ![NexusIQ Homepage Animation](./Animation.gif)
 
-Try the [AI Configurator](https://nexusiq-nine.vercel.app/build) — a Claude-powered chat that takes your project requirements in plain English and generates a full repo scaffold.
+
 
 ## 📊 Architecture Overview
 
