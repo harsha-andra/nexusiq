@@ -2,7 +2,7 @@
 
 Production-grade AI/ML platform landing page with a working Claude-powered project configurator.
 
-**Live demo:** _(fill in your Vercel URL after deploying)_
+**Live demo:**(https://nexusiq-nine.vercel.app/)
 
 ## What this is
 
