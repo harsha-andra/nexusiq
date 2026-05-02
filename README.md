@@ -39,7 +39,7 @@ After studying 40+ ML platforms, NexusIQ ships three features that are consisten
 
 ## 🚀 Quick Deploy
 
-Three options — pick what fits your budget today, scale up when ready.
+Three options pick what fits your budget today, scale up when ready.
 
 ### Option 1 — Local Docker (FREE, 10 min)
 ```bash
