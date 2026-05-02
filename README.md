@@ -1,99 +1,175 @@
 # 🧠 NexusIQ — Universal AI Analytics Platform
 
-**Production-grade end-to-end AI/ML platform** that unifies data pipelines, ML models, GenAI, and observability into one deployable stack built with the same architecture used at Netflix, JPMorgan, and Datadog.
+A production-grade full-stack AI/ML platform showcase covering everything a senior AI/ML engineer ships in real systems: ingestion, big-data processing, continuous training, GenAI, explainability, and observability wrapped in a polished B2B SaaS experience.
 
-![Python](https://img.shields.io/badge/Python-3.11-blue) ![PySpark](https://img.shields.io/badge/PySpark-3.5-orange) ![Hadoop](https://img.shields.io/badge/Hadoop-3.3-yellow) ![Kafka](https://img.shields.io/badge/Apache%20Kafka-3.6-black) ![Docker](https://img.shields.io/badge/Docker-24-2496ED) ![Kubernetes](https://img.shields.io/badge/Kubernetes-1.29-326CE5) ![AWS](https://img.shields.io/badge/AWS-EMR%20%7C%20SageMaker-FF9900) ![Terraform](https://img.shields.io/badge/Terraform-1.7-7B42BC) ![LangChain](https://img.shields.io/badge/LangChain-0.2-1C3C3C) ![HuggingFace](https://img.shields.io/badge/🤗-HuggingFace-yellow) ![License](https://img.shields.io/badge/license-MIT-green)
+![Next.js](https://img.shields.io/badge/Next.js-14-black) ![PySpark](https://img.shields.io/badge/PySpark-3.5-orange) ![Hadoop](https://img.shields.io/badge/Hadoop-3.3-yellow) ![Docker](https://img.shields.io/badge/Docker-Compose-blue) ![Terraform](https://img.shields.io/badge/Terraform-1.7-purple) ![Claude API](https://img.shields.io/badge/Claude-Sonnet%204.5-7c6ff7) ![License](https://img.shields.io/badge/license-MIT-green)
 
-## 🎯 What This Project Does
+## 🌐 Live Demo
 
-Most ML platforms answer *"can I train a model?"* — NexusIQ answers *"how do I run an entire production ML organization?"* It demonstrates the **full lifecycle** of a real AI/ML system: data ingestion through Kafka, big-data ETL with PySpark on Hadoop/HDFS, continuous training through Airflow + SageMaker + MLflow, RAG-powered GenAI through LangChain + Pinecone + Azure OpenAI, explainable predictions with SHAP, A/B model testing, and observability through Prometheus + Grafana — all wired into Docker, Kubernetes, GitHub Actions CI/CD, and Terraform-managed AWS infrastructure.
+### **[👉 nexusiq-nine.vercel.app](https://nexusiq-nine.vercel.app)**
 
-The frontend is **deployed live to the public** at [nexusiq-nine.vercel.app](https://nexusiq-nine.vercel.app). The full backend stack runs locally with one Docker Compose command and deploys to AWS Free Tier with one Terraform apply.
+![NexusIQ Homepage](./Animation.gif)
 
-## 🖥️ Live Demo
+**Try it live:** [Homepage](https://nexusiq-nine.vercel.app) · [AI Configurator](https://nexusiq-nine.vercel.app/build) · [Source Code](https://github.com/harsha-andra/nexusiq)
 
-### **🌐 [nexusiq-nine.vercel.app](https://nexusiq-nine.vercel.app)**
+## 🎯 What This Project Is
 
-![NexusIQ Homepage Animation](./Animation.gif)
+NexusIQ is a **production-grade reference implementation** of a universal AI analytics platform. The frontend is live on Vercel. The full backend stack — every service, DAG, Spark job, Terraform module, and Dockerfile — is fully written and ready to deploy.
 
+The repo demonstrates real-world AI/ML engineering across every layer:
 
+- **Frontend** — Next.js 14 landing page deployed live, with a Claude-powered AI configurator
+- **Microservices** — 5 FastAPI services (ingestion, inference with SHAP, RAG, analytics, notifications), each with Dockerfile + Prometheus metrics
+- **Big-data ETL** — PySpark jobs running on Hadoop/HDFS or AWS EMR with Delta Lake
+- **Streaming** — Apache Kafka producers + Spark Structured Streaming consumers
+- **ML Platform** — Airflow DAG orchestrating Spark → SageMaker training → MLflow → blue/green deploy
+- **GenAI** — LangChain + Pinecone + Azure OpenAI RAG service (streaming responses)
+- **Infrastructure-as-Code** — Terraform with **Free Tier mode** (default $0) and production mode (full EKS/SageMaker/MSK)
+- **CI/CD** — GitHub Actions: test → lint → build → push → optional manual AWS deploy
 
-## 📊 Architecture Overview
+## 💡 Three Capabilities the Market is Missing
 
-NexusIQ is composed of **7 production layers**, each implemented in this repository:
+After studying 40+ ML platforms, NexusIQ ships three features that are consistently absent or poorly done elsewhere:
 
-| Layer | Components | Tools |
-|-------|-----------|-------|
-| **1 · Frontend** | Landing page, AI configurator, product demos | Next.js 14, React 18, TypeScript, Vercel |
-| **2 · API Microservices** | Ingestion, Inference (SHAP XAI), RAG, Analytics, Notifications | FastAPI, Pydantic, Prometheus client |
-| **3 · Streaming** | Real-time event ingestion + processing | Apache Kafka 3.6, Spark Structured Streaming |
-| **4 · Big-Data ETL** | Petabyte-scale batch processing | PySpark 3.5, Hadoop HDFS, Delta Lake, AWS EMR |
-| **5 · ML Platform** | DAG orchestration, training, registry, deploy | Airflow, MLflow, SageMaker, Feast, Evidently AI |
-| **6 · GenAI Layer** | RAG, NL→Spark, autonomous research | LangChain, Pinecone, Azure OpenAI, HuggingFace ml-intern |
-| **7 · Infrastructure** | Multi-cloud deployment, CI/CD, monitoring | Docker, Kubernetes, Terraform, GitHub Actions, Grafana |
+| Capability | What It Does |
+|------------|--------------|
+| **Explainable AI (XAI)** | Every prediction has a SHAP breakdown, audit trail, and exportable compliance report |
+| **Live A/B Model Testing** | Route traffic between Champion and Challenger models with auto-promotion |
+| **Natural Language → Spark/SQL** | Type a question in English, get PySpark/SQL that runs on your data lake |
 
-## 🔬 Methodology — How Each Layer Works
+## 🚀 Quick Deploy
 
-### 1 · Data Ingestion
-The `backend/ingestion` service exposes a REST API that validates incoming records (finance, healthcare, retail, ops domains), enriches them with batch IDs and timestamps, and produces them to Apache Kafka topics. Prometheus metrics track accept/reject rates and latency in real time.
+Three options — pick what fits your budget today, scale up when ready.
 
-### 2 · Streaming + Batch ETL with PySpark + Hadoop
-Two PySpark applications run on either local Docker or AWS EMR:
-
-- `streaming_job.py` reads from Kafka topics with `spark.readStream`, parses JSON, and writes to Delta Lake on S3 with checkpointing for exactly-once semantics
-- `etl_job.py` performs batch feature engineering with rolling-window aggregations (7-day average, 30-day z-score, lag features) using PySpark window functions, then writes partitioned Delta Lake tables
-
-The full Hadoop cluster (HDFS + YARN) runs in a Docker container at `ml-pipeline/hadoop/Dockerfile`, exposing the standard ports (9000, 9870, 8088).
-
-### 3 · ML Training with SageMaker + MLflow
-The Airflow DAG `nexusiq_ml_pipeline` runs daily at 02:00 UTC and:
-
-1. Checks the drift score from Evidently AI; branches early if drift is below threshold
-2. Spins up an EMR cluster, runs the Spark ETL, terminates the cluster
-3. Submits a SageMaker XGBoost training job using the processed features
-4. Registers the run in MLflow, comparing AUC against the current Champion
-5. Auto-promotes the model to Production stage if it wins
-6. Triggers a blue/green deploy to the SageMaker endpoint
-7. Sends a Slack notification with the result
-
-### 4 · GenAI with LangChain + Pinecone + Azure OpenAI
-The `backend/rag` service runs LangChain LCEL chains that:
-
-- Embed user queries with `text-embedding-3-large` via Azure OpenAI
-- Retrieve top-5 relevant documents from Pinecone
-- Stream responses through Azure OpenAI GPT-4o using server-sent events
-- Trace every call in LangSmith for quality monitoring
-
-A second endpoint, `/nl-to-spark`, takes a natural-language question and outputs runnable PySpark code targeting the data lake schema.
-
-### 5 · Explainable AI with SHAP
-Every prediction from `backend/inference` can include a SHAP explanation showing feature contributions toward the model's output. Each prediction gets a UUID and is cached for audit. The audit trail captures the model version, A/B variant, timestamp, and SHAP values — required for compliance in finance and healthcare.
-
-### 6 · A/B Model Testing
-Inference traffic routes between Champion and Challenger models based on a configurable split (default 70/30). The service tracks conversion metrics per variant and the architecture supports auto-promotion when statistical significance is achieved.
-
-### 7 · Autonomous Research with HuggingFace ml-intern
-The `ml-pipeline/ml_intern/integration.py` module wraps the [HuggingFace ml-intern](https://github.com/huggingface/ml-intern) CLI to automate three tasks: finding the best HuggingFace model for a domain, implementing techniques from arxiv papers, and fine-tuning models with LoRA tracked through MLflow.
-
-## 📈 Key Implementation Metrics
-
-| Component | Metric | Value |
-|-----------|--------|-------|
-| **Microservices** | Number of FastAPI services | 5 |
-| **Microservices** | Average lines per service | ~150 |
-| **Containers** | Total Dockerfiles | 7 |
-| **Spark** | PySpark jobs | 2 (batch + streaming) |
-| **Spark** | Window features computed | 14 per record |
-| **Airflow** | DAG tasks | 8 (with branching) |
-| **Inference** | Prediction latency (mock) | <50 ms p99 |
-| **Inference** | A/B variants supported | Champion + Challenger |
-| **GenAI** | RAG retrieval k | 5 documents |
-| **Infrastructure** | Terraform resources | 12+ (VPC, EC2, S3, MSK, RDS, IAM) |
-| **CI/CD** | GitHub Actions workflows | 2 (CI + AWS deploy) |
-| **Monitoring** | Prometheus scrape targets | 4 services |
-
-## 🚀 Quick Start
-
-### Option A — Local Docker Compose ($0)
-
+### Option 1 — Local Docker (FREE, 10 min)
 ```bash
+git clone https://github.com/harsha-andra/nexusiq.git
+cd nexusiq
+./scripts/setup_local.sh
+# Visit http://localhost:8080 (Airflow), :5000 (MLflow), :8001 (API)
+```
+
+### Option 2 — AWS Free Tier (FREE for 12 months, 30 min)
+```bash
+cd infra/aws
+terraform init
+terraform apply -var-file=variables.tfvars
+# Get your live EC2 URL from terraform output
+```
+
+### Option 3 — Production AWS (~$900/mo)
+Edit `infra/aws/variables.tfvars`: `free_tier = false`. Then `terraform apply`.
+
+**Full step-by-step instructions in [DEPLOY.md](./DEPLOY.md).**
+
+##  Project Structure
+
+```
+├── src/                          # Next.js frontend (deployed to Vercel)
+│   └── app/
+│       ├── page.tsx              # Animated landing page
+│       ├── build/page.tsx        # Claude-powered AI configurator
+│       └── api/chat/route.ts     # Serverless AI endpoint
+│
+├── backend/                      # Python FastAPI microservices
+│   ├── ingestion/                # Kafka producer, validation, Prometheus metrics
+│   ├── inference/                # SageMaker wrapper + SHAP XAI + A/B routing
+│   ├── rag/                      # LangChain + Pinecone streaming chat + NL→Spark
+│   ├── analytics/                # Drift reports, pipeline status, Power BI tokens
+│   └── notifications/            # SNS/SES/Slack alerting
+│
+├── ml-pipeline/                  # The actual ML stack
+│   ├── spark/                    # PySpark ETL + Streaming jobs
+│   ├── hadoop/                   # Hadoop/HDFS Dockerfile + configs
+│   ├── airflow/                  # Master DAG orchestrating the full pipeline
+│   ├── training/                 # SageMaker training launcher
+│   └── ml_intern/                # HuggingFace ml-intern automation
+│
+├── infra/                        # Infrastructure-as-code
+│   ├── aws/                      # Terraform — Free Tier OR Production mode
+│   ├── azure/                    # Power BI Embedded + OpenAI configs
+│   └── k8s/                      # Kubernetes deployments + HPA
+│
+├── monitoring/                   # Prometheus + Grafana + alerts
+├── .github/workflows/            # CI/CD: ci.yml + deploy-aws.yml
+├── scripts/                      # setup_local.sh, test_pipeline.sh, deploy_to_ec2.sh
+├── docker-compose.yml            # Full local stack
+└── DEPLOY.md                     # Step-by-step deployment guide
+```
+
+## 🔬 Architecture Layers (all implemented)
+
+### 1 · Data & Streaming
+- Apache Kafka producers in `backend/ingestion`
+- Spark Structured Streaming consumers in `ml-pipeline/spark/streaming_job.py`
+- Hadoop HDFS Docker container in `ml-pipeline/hadoop/`
+
+### 2 · Batch ETL
+- PySpark feature engineering with rolling windows in `ml-pipeline/spark/etl_job.py`
+- Delta Lake output for ACID transactions
+- Data quality checks before write
+
+### 3 · ML Platform
+- Airflow DAG (`ml_pipeline_dag.py`) with drift-triggered branching
+- MLflow registration + model promotion
+- SageMaker training launcher
+- Auto blue/green deployment
+
+### 4 · GenAI Layer
+- LangChain LCEL chains for streaming RAG
+- Pinecone vector store integration
+- Azure OpenAI GPT-4o
+- Natural-language-to-PySpark endpoint
+
+### 5 · Inference & Explainability
+- SHAP explainer for every prediction
+- A/B test traffic routing (Champion vs Challenger)
+- Audit trails with prediction-ID lookup
+- Prometheus metrics on every call
+
+### 6 · Infrastructure
+- Terraform AWS module with **Free Tier toggle**
+- Kubernetes manifests + HPA
+- All services have Dockerfiles
+- Multi-arch container images via buildx
+
+### 7 · Observability
+- Prometheus scraping every service
+- Grafana dashboard provisioned automatically
+- Evidently AI for model drift
+- Slack alerts via notifications service
+
+## 🛠️ Tech Stack
+
+| Layer | Tools |
+|-------|-------|
+| **Frontend** | Next.js 14 · React 18 · TypeScript 5.5 · Vercel |
+| **Backend** | FastAPI · Pydantic · Celery · Redis |
+| **Streaming** | Apache Kafka · Spark Structured Streaming |
+| **Batch ETL** | PySpark 3.5 · Hadoop HDFS · Delta Lake · AWS EMR |
+| **ML Ops** | Airflow · MLflow · SageMaker · Feast · Evidently AI |
+| **GenAI** | LangChain · Pinecone · Azure OpenAI · LangSmith |
+| **Explainability** | SHAP · audit logging |
+| **Infrastructure** | Terraform · Kubernetes (EKS) · Docker · Helm |
+| **CI/CD** | GitHub Actions · ECR · Trivy scanning · Blue/green |
+| **Monitoring** | Prometheus · Grafana · Evidently · Slack |
+| **Multi-cloud** | AWS · Azure · GCP · HuggingFace |
+
+## 👤 About the Author
+
+**Harsha Andra** — AI/ML Engineer specializing in production GenAI systems.
+
+- 🧪 Healthcare RAG chatbots (LangChain + Pinecone + Azure OpenAI)
+- 📈 FMCG forecasting pipelines (Kafka + Airflow + XGBoost)
+- 🤖 Autonomous AI systems (LangGraph + multi-agent orchestration)
+- 💼 Currently seeking AI/ML Engineer and GenAI Engineer roles
+
+**Contact:** [LinkedIn](https://linkedin.com/in/harsha-andra) · [Portfolio](https://harsha-andra.github.io) · [sonuandra@gmail.com](mailto:sonuandra@gmail.com)
+
+## 📄 License
+
+MIT — feel free to fork, learn from, or adapt.
+
+---
+
+**If NexusIQ helped you or inspired your own project, give it a ⭐ — it really helps!**
