@@ -14,7 +14,7 @@ A production-grade full-stack AI/ML platform showcase covering everything a seni
 
 ## 🎯 What This Project Is
 
-NexusIQ is a **production-grade reference implementation** of a universal AI analytics platform. The frontend is live on Vercel. The full backend stack — every service, DAG, Spark job, Terraform module, and Dockerfile — is fully written and ready to deploy.
+NexusIQ is a **production-grade reference implementation** of a universal AI analytics platform. The frontend is live on Vercel. The full backend stack every service, DAG, Spark job, Terraform module, and Dockerfile is fully written and ready to deploy.
 
 The repo demonstrates real-world AI/ML engineering across every layer:
 
